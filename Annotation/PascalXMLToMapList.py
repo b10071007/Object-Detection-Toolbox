@@ -7,7 +7,7 @@ import xml.dom.minidom
 #-----------------------------------------------------------------------------#
 
 # Convert Pascal format(xml) into mapping list(txt)
-def PascalToMapList(srcImgPath, srcAnnotPath, outFilePath, strPrefix, img_format):
+def PascalXMLToMapList(srcImgPath, srcAnnotPath, outFilePath, strPrefix, img_format):
 
     outFObj = open(outFilePath, "w")
 
@@ -86,7 +86,7 @@ def main():
     outFilePath   = rootPath + outFile
 
     print("Convert into mapping list...\n")
-    fileCnt = PascalToMapList(srcImgPath, srcAnnotPath, outFilePath, strPrefix, img_format)
+    fileCnt = PascalXMLToMapList(srcImgPath, srcAnnotPath, outFilePath, strPrefix, img_format)
     print("Done!")
     print("Total # of samples = %d\n" % fileCnt)
 
