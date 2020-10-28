@@ -74,7 +74,7 @@ def main():
                     ]
   
   outFileList = [
-                "_image_list.txt",
+                "_image_list_All.txt",
                 ]
     
   img_format = 'jpg'  

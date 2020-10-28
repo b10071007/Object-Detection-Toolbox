@@ -178,13 +178,13 @@ def convert_each(file, srcImgPath, out_path, img_format,
     XML_converter(out_path, img_info, box_info, merge_class, classAddOne)
 
     
-def MapListToPascalXML(srcImgPath, out_path_list, dir_map_lists, img_format, 
+def MapListToPascalXML(srcImgPathList, out_path_list, dir_map_lists, img_format, 
                            merge_class, classAddOne, removeSpaceInFName):
 
     print('[Parse Annotation]')
     display_iter = 1000
     for idx_mlist in range(len(dir_map_lists)):  
-        srcImgPath_i = srcImgPath[idx_mlist]
+        srcImgPath = srcImgPathList[idx_mlist]
         dir_map_list = dir_map_lists[idx_mlist]
         out_path = os.path.join(out_path_list[idx_mlist], "Annotations")
         
@@ -199,7 +199,7 @@ def MapListToPascalXML(srcImgPath, out_path_list, dir_map_lists, img_format,
         data_size = len(map_list)
         
         for idx in range(data_size):
-            convert_each(map_list[idx], srcImgPath_i, out_path, img_format, 
+            convert_each(map_list[idx], srcImgPath, out_path, img_format, 
                          merge_class, classAddOne, removeSpaceInFName)
             if (idx+1) % display_iter == 0:
                 print('converting... [{}/{}]'.format(idx+1, data_size))
@@ -214,20 +214,26 @@ def main():
     
     rootPath = "D:/Dataset/Detection/Taiwan_coin/"
     
-    srcImgPath = [os.path.join(rootPath, "_Images")]
+    srcImgPathList = [os.path.join(rootPath, "_Images")] * 3
     
     outPath = os.path.join(rootPath, "Pascal_format")
     img_format=".jpg"
     
-    dir_map_lists = [os.path.join(rootPath, "_image_list.txt")]
+    dir_map_lists = [os.path.join(rootPath, "_train_map.txt"),
+                     os.path.join(rootPath, "_val_map.txt"),
+                     os.path.join(rootPath, "_test_map.txt"),
+                     ]
     
-    out_path_list = [os.path.join(outPath, "all")]
+    out_path_list = [os.path.join(outPath, "train"),
+                     os.path.join(outPath, "val"),
+                     os.path.join(outPath, "test"),
+                     ]
     
     merge_class = False
     classAddOne = True
     removeSpaceInFName = True
 
-    MapListToPascalXML(srcImgPath, out_path_list, dir_map_lists, img_format, merge_class, 
+    MapListToPascalXML(srcImgPathList, out_path_list, dir_map_lists, img_format, merge_class, 
                        classAddOne, removeSpaceInFName) 
 
 #-------------------------------------------------------------------------------------------------#
